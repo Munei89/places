@@ -21,6 +21,14 @@
   <component name="ChangeListManager">
     <list default="true" id="eeb00716-8cd3-4c37-b592-22b14afd9868" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/SinglePlaceCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/SinglePlaceCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Favouritise/Favouritise.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Favouritise/Favouritise.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/HomePage/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/HomePage/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/PlacesImagesGrid/ImagesGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/PlacesImagesGrid/ImagesGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/PlacesListPage/ListOfPlaces.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/PlacesListPage/ListOfPlaces.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +86,7 @@
       <workItem from="1597564873062" duration="845000" />
       <workItem from="1597565744513" duration="108000" />
       <workItem from="1597565883120" duration="2432000" />
+      <workItem from="1597748653575" duration="1924000" />
     </task>
     <servers />
   </component>

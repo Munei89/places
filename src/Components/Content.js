@@ -1,26 +1,13 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Home from '../Pages/HomePage/Home';
 import ListOfPlaces from '../Pages/PlacesListPage/ListOfPlaces';
 import ImagesGrid from '../Pages/PlacesImagesGrid/ImagesGrid';
 import Details from '../Pages/PlaceDetailedPage/Details';
 import Favouritise from '../Pages/Favouritise/Favouritise';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-}));
+
 const Content = () => {
-    const classes = useStyles();
 
     return <>
 

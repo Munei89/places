@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -8,21 +8,14 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import axios from 'axios';
 import noimage from '../assets/asd.jpg'
-import { Grid } from '@material-ui/core';
-import { useSelector, useDispatch } from 'react-redux';
-import { favouritise } from '../actions'
-
-
+import noimageavailable from '../assets/No_Image_Available.jpg'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,45 +49,50 @@ export default function SinglePlaceCard(props) {
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
-    const [myfvrtplcs, setmyfvrtplcs] = useState([]);
-    let Favouritiseredux = useSelector(state => state.FavPReducer)
-    const dispatch = useDispatch();
-    // console.log("props", props);
+    const [bindimage, setbindimage] = useState(noimage);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+    let imageBe;
     const local_storage_key = "key.fvrt.plcs"
-    const Getimages = () => {
 
-        //     const query = "https://api.foursquare.com/v2/venues/"+props.place.id+"/photos?client_id=P5Q4NZUINIQW2PP5YGAN2IM4J0S4ZHN0HAG5NNZKYSSOTLSJ&client_secret=1KOJ5FJAI5AWRDOKONTALJA5SUGAFRUMEDAW1AD2IXGN202M&v=20190425&group=venue&limit=10" 
-        // axios.get(query).
-        // then(res => {
-        //     console.log('-----------------');
-        //     console.log(res);
-        //     console.log(res.data.response.photos.count);
-        //     console.log(res.data.response.photos.items);
-        //   console.log('-----------------');
-        //   if(res.data.response.photos.count>0)
-        //   return ""
-        //   else
-        //   return noimage
-        //   });
-        return noimage
-    }
-    
+
+        const query = 'https://api.foursquare.com/v2/venues/' + props.place.id + '/photos?client_id=P5Q4NZUINIQW2PP5YGAN2IM4J0S4ZHN0HAG5NNZKYSSOTLSJ&client_secret=1KOJ5FJAI5AWRDOKONTALJA5SUGAFRUMEDAW1AD2IXGN202M&v=20190425&group=venue&limit=10'
+        axios.get(query).then(res => {
+                // console.log('-----------------');
+                // console.log(res.data.response.photos.items);
+                // console.log(res.data.response.photos.count);
+                // console.log(res.data.response.photos.items);
+                // console.log('-----------------');
+                if (res.data.response.photos.items.length > 0) {
+                    let arr = res.data.response.photos.items;
+                    // console.log("==========>", arr[0].prefix + "500x300" + arr[0].suffix)
+                    imageBe = arr[0].prefix + "500x300" + arr[0].suffix;
+                    setbindimage(imageBe);
+                }
+                else {
+                    setbindimage(noimageavailable);
+                }
+            }).catch(()=>{
+                setbindimage(noimageavailable);
+            })
+        imageBe = noimage
+
+
     //  useEffect(()=>{
-         
+
     //     dispatch(favouritise(JSON.parse(localStorage.getItem(local_storage_key))));
     //     console.log("why me",JSON.parse(localStorage.getItem(local_storage_key)))
     //  },myfvrtplcs)
-    console.log("propertise =>>>>>>", props)
-    console.log("has own =>>>>>>", props.hasOwnProperty('parenthandler') )
-     
+    // console.log("propertise =>>>>>>", props)
+    // console.log("has own =>>>>>>", props.hasOwnProperty('parenthandler') )
+
     function SaveMe() {
         // localStorage.clear();
-        
+
         let fvrtsfromlocal = JSON.parse(localStorage.getItem(local_storage_key))
-         console.log("from local at first", fvrtsfromlocal)
+        //  console.log("from local at first", fvrtsfromlocal)
         if (fvrtsfromlocal == null) {
             let fvrtarray = [];
             fvrtarray.push(props.place)
@@ -106,7 +104,7 @@ export default function SinglePlaceCard(props) {
         }
         else {
             const count = fvrtsfromlocal.length;
-            const newarray = fvrtsfromlocal.filter(item => item.id != props.place.id);
+            const newarray = fvrtsfromlocal.filter(item => item.id !== props.place.id);
             if (count === newarray.length) {
                 newarray.push(props.place);
                 localStorage.clear();
@@ -125,14 +123,13 @@ export default function SinglePlaceCard(props) {
                 // setmyfvrtplcs(item => {
                 //     return [...newarray]
                 // })
-                
+
             }
 
 
         }
-        if(props.hasOwnProperty('parenthandler'))
-        {
-            console.log("-------------------------------------")
+        if (props.hasOwnProperty('parenthandler')) {
+            // console.log("-------------------------------------")
             props.parenthandler();
         }
         // console.log("from local storage", JSON.parse(localStorage.getItem(local_storage_key)));
@@ -143,11 +140,11 @@ export default function SinglePlaceCard(props) {
         <Card key={props.place.id} className={classes.root}>
             <CardHeader
                 title={props.place.name}
-                subheader={props.place.categories[0].name}
+                subheader={props.place.categories.length > 0 ? props.place.categories[0].name : "Category Not available"}
             />
             <CardMedia
                 className={classes.media}
-                image={Getimages()}
+                image={bindimage}
                 title={props.place.name}
             />
             <CardContent>
@@ -177,7 +174,7 @@ export default function SinglePlaceCard(props) {
                         Name:{props.place.name}
                     </Typography>
                     <Typography paragraph>
-                        Category:{props.place.categories[0].name}
+                        Category:{props.place.categories.length > 0 ? props.place.categories[0].name : "Category Not available"}
                     </Typography>
                     <Typography paragraph>
                         Country:{props.place.location.country}<br />
